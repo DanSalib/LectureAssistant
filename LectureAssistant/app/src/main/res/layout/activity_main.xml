@@ -27,6 +27,6 @@
         android:layout_height="wrap_content"
         android:background="#5c5cd6"
         android:textColor="#ffffff"
-        tools:text="Listen" />
+        android:text="Listen" />
 
 </LinearLayout>
