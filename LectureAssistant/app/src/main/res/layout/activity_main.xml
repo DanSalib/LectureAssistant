@@ -21,12 +21,12 @@
 
     </FrameLayout>
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/navigation"
+    <Button
+        android:id="@+id/listenButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:background="?android:attr/windowBackground"
-        app:menu="@menu/navigation" />
+        android:background="#5c5cd6"
+        android:textColor="#ffffff"
+        tools:text="Listen" />
 
 </LinearLayout>
