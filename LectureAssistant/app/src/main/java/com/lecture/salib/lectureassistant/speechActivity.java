@@ -51,7 +51,7 @@ public class speechActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 String txt = input.getText().toString();
                 Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
-                //EndLecture();
+                EndLecture();
             }
         });
 
