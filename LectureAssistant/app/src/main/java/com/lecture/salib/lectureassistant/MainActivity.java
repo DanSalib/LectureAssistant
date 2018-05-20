@@ -33,7 +33,7 @@ import cz.msebera.android.httpclient.Header;
 public class MainActivity extends Activity {
 
     public static final String EXTRA_DATA = "com.lecture.salib.lectureassistant.EXTRA_DATA";
-    private JSONArray lectureData = new JSONArray();
+    public static JSONArray lectureData = new JSONArray();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,6 +51,12 @@ public class MainActivity extends Activity {
                 openSpeechActivity();
             }
         });
+    }
+
+    @Override
+    protected  void onResume() {
+        super.onResume();
+        GetLectures();
     }
 
     public void openListDataActivity(String text) {
