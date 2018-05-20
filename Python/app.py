@@ -31,6 +31,7 @@ class Multi(Resource):
 			c.execute('INSERT INTO posts VALUES("%s"' %text1+ ', "%s"' %text2 + ')')
 			cur = c.execute('select * from posts')
 			posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+			c.close()
 			return posts
 
 def connect_db():

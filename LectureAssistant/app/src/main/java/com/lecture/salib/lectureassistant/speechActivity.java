@@ -49,7 +49,7 @@ public class speechActivity extends AppCompatActivity {
             case 10:
                 if(resultCode == RESULT_OK && data != null) {
                     ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-                    speechText.setText(speechText.getText()+ " " + result.get(0));
+                    speechText.setText(speechText.getText()+ "\n" + result.get(0));
                 } else if(resultCode == RESULT_CANCELED) {
                     //ArrayList<String> result = data.getStringArrayListExtra(RecognizerIntent.EXTRA_PARTIAL_RESULTS);
                     //speechText.setText("cancelled");
