@@ -41,4 +41,4 @@ api.add_resource(getLectures, '/')
 api.add_resource(Multi, '/multi/<string:text1>/<string:text2>')
 
 if __name__ == '__main__':
-	app.run(debug=True, host='192.168.2.16')
+	app.run(debug=True, host='192.168.2.16', port='5004')

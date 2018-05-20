@@ -1,21 +1,38 @@
 package com.lecture.salib.lectureassistant;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONArray;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
+import cz.msebera.android.httpclient.Header;
+
 public class speechActivity extends AppCompatActivity {
 
     TextView speechText;
+    EditText input;
+    Button showButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +40,36 @@ public class speechActivity extends AppCompatActivity {
         setContentView(R.layout.activity_speech);
 
         speechText = (TextView) findViewById(R.id.speechText);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Lecture Title");
+        input = new EditText(this);
+        builder.setView(input);
+
+        builder.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                String txt = input.getText().toString();
+                Toast.makeText(getApplicationContext(), txt, Toast.LENGTH_LONG).show();
+                //EndLecture();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        final AlertDialog ad = builder.create();
+
+        showButton = (Button) findViewById(R.id.endButton);
+        showButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ad.show();
+            }
+        });
     }
 
     public void getSpeechInput(View view) {
@@ -57,5 +104,24 @@ public class speechActivity extends AppCompatActivity {
                 break;
         }
     }
+
+    public void EndLecture() {
+        String urlString = "http://192.168.2.16:5004/multi/" + input.getText() + "/" + speechText.getText();
+        urlString = urlString.replaceAll("\\s+","%20");
+        final speechActivity speechAct = this;
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.post(urlString, null, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+
 
 }

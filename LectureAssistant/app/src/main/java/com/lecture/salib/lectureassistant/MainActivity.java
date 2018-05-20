@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
     }
 
     public void GetLectures() {
-        String urlString = "http://192.168.2.16:5000/";
+        String urlString = "http://192.168.2.16:5004/";
         this.lectureData = new JSONArray();
         final MainActivity mainActivity = this;
         AsyncHttpClient client = new AsyncHttpClient();
@@ -113,6 +113,4 @@ public class MainActivity extends Activity {
             }
         });
     }
-
-
 }

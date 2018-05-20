@@ -51,14 +51,15 @@
             tools:layout_editor_absoluteY="440dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/endButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="#5c5cd6"
+            android:text="Finish Lecture"
+            android:textColor="#ffffff"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginBottom="10dp"
-            android:textColor="#ffffff"
-            android:text="Finish Lecture" />
+            android:layout_marginBottom="11dp" />
 
     </RelativeLayout>
 
