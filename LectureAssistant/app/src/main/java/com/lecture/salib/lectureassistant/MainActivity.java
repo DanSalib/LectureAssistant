@@ -87,7 +87,7 @@ public class MainActivity extends Activity {
                         String[] items = new String[lectureData.length()];
 
                         for(int i = 0; i < lectureData.length(); i++) {
-                            items[i] = lectureData.getJSONObject(i).get("title").toString();
+                            items[i] = lectureData.getJSONObject(i).get("title").toString() + "     " + lectureData.getJSONObject(i).get("dateof").toString();
                         }
 
                         ListAdapter lectureAdapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_list_item_1, items);
@@ -100,7 +100,7 @@ public class MainActivity extends Activity {
                                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                                         String item = String.valueOf(parent.getItemAtPosition(position));
                                         try {
-                                            openListDataActivity(lectureData.getJSONObject(position).getString("description"));
+                                            openListDataActivity(lectureData.getJSONObject(position).getString("data"));
                                         } catch (Exception e) {
                                             e.printStackTrace();
                                         }

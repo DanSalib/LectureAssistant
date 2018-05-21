@@ -1,13 +1,12 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g
 from flask_restful import Resource, Api
 import sqlite3
+import datetime
 
 app = Flask(__name__)
 
 app.host = '0.0.0.0'
-
 app.secret_key = "super secret"
-
 app.database = "sample.db"
 
 api = Api(app)
@@ -16,7 +15,7 @@ class getLectures(Resource):
 	def get(self):
 		g.db = connect_db()
 		cur = g.db.execute('select * from posts')
-		posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+		posts = [dict(title=row[0], dateof=row[1], data=row[2]) for row in cur.fetchall()]
 		g.db.close()
 		return posts
 
@@ -26,11 +25,13 @@ class getLectures(Resource):
 
 class Multi(Resource):
 	def post(self, text1, text2):
+		now = datetime.datetime.now()
+
 		with sqlite3.connect("sample.db") as connection:
 			c = connection.cursor()
-			c.execute('INSERT INTO posts VALUES("%s"' %text1+ ', "%s"' %text2 + ')')
+			c.execute('INSERT INTO posts VALUES("%s"'%text1 +', "%s"' %(now.strftime("%Y-%m-%d %H:%M")) + ', "%s"' %text2 + ')')
 			cur = c.execute('select * from posts')
-			posts = [dict(title=row[0], description=row[1]) for row in cur.fetchall()]
+			posts = [dict(title=row[0], dateof=row[1], data=row[2]) for row in cur.fetchall()]
 			c.close()
 			return posts
 
